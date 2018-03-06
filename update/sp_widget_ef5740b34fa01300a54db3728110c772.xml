@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[
+function(spModal) {
+  var c = this;
+  c.onOpen = function() {
+        //ask the user for a string
+        spModal.open({
+            title: 'Give me a name',
+            message: 'What would you like to name it?',
+            input: true,
+            value: c.name
+        }).then(function(name) {
+            c.name = name;
+        })
+    }
+}
+
+function(spModal) {
+  var c = this;
+  c.onWidget = function(widgetId, widgetInput) {
+        spModal.open({
+            title: 'Displaying widget ' + widgetId,
+            widget: widgetId, 
+            widgetInput: widgetInput || {}
+        }).then(function(){
+            console.log('widget dismissed');
+        })      
+    }
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>my_button</id>
+        <internal>false</internal>
+        <link/>
+        <name>My Button</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-06 11:05:47</sys_created_on>
+        <sys_id>ef5740b34fa01300a54db3728110c772</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>My Button</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_ef5740b34fa01300a54db3728110c772</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-03-06 11:28:22</sys_updated_on>
+        <template><![CDATA[<div>
+  <button ng-click="c.onOpen()" class="btn btn-default">
+    Prompt with label
+  </button>
+  <div ng-show="c.name">
+    You answered <span>{{c.name}}</span>
+ </div>
+  
+  
+  <div>
+  <!-- your widget template -->
+ <button ng-click="c.onWidget('widget-cool-clock')" class="btn btn-default">
+   I Am.... Cool Clock
+  </button>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>
